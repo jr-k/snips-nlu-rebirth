@@ -1,6 +1,6 @@
 use serde_derive::{Serialize, Deserialize};
 use std::fmt;
-use crate::schema::snips_nlu;
+use snips_nlu_ontology::{IntentClassifierResult, Slot};
 
 #[allow(non_snake_case)]
 #[derive(Deserialize)]
@@ -20,7 +20,9 @@ impl fmt::Display for NluQuery {
 #[allow(non_snake_case)]
 #[derive(Serialize)]
 pub struct NluError {
-    pub message: String
+    pub sessionId: Option<String>,
+    pub error: String,
+    pub context: Option<String>
 }
 
 #[allow(non_snake_case)]
@@ -37,6 +39,6 @@ pub struct NluIntentParsed {
     pub input: Option<String>,
     pub id: Option<String>,
     pub sessionId: Option<String>,
-    pub intent: Option<snips_nlu::SnipsNluIntent>,
-    pub slots: Vec<snips_nlu::SnipsNluSlot>,
+    pub intent: IntentClassifierResult,
+    pub slots: Vec<Slot>,
 }

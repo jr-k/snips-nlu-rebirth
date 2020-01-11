@@ -2,11 +2,10 @@ extern crate serde_json;
 
 use rumqtt::{MqttClient, MqttOptions, QoS, SecurityOptions};
 use snips_nlu_lib::SnipsNluEngine;
-use snips_nlu_ontology::{IntentParserResult, IntentClassifierResult, Slot};
+use snips_nlu_ontology::{IntentParserResult};
 use std::str;
 use crate::schema::config;
 use crate::schema::hermes;
-use crate::schema::snips_nlu;
 
 pub fn start(config: &config::Config, engine: &SnipsNluEngine) {
 
@@ -48,9 +47,14 @@ pub fn start(config: &config::Config, engine: &SnipsNluEngine) {
     };
 }
 
-pub fn hermes_error_nlu(mqtt_client: &mut MqttClient, error_message: &str) {
+pub fn hermes_error_nlu(mqtt_client: &mut MqttClient, parsed_query: Option<hermes::NluQuery>, error_message: &str) {
     let nlu_error: hermes::NluError = hermes::NluError {
-        message: String::from(error_message)
+        sessionId: match parsed_query {
+            Some(pq) => { pq.sessionId },
+            None => { None }
+        },
+        error: String::from(error_message),
+        context: None
     };
 
     let result_json = serde_json::to_string(&nlu_error).unwrap();
@@ -72,8 +76,8 @@ pub fn hermes_nlu_intent_parsed(mqtt_client: &mut MqttClient, parsed_query: herm
         input: parsed_query.input,
         id: parsed_query.id,
         sessionId: parsed_query.sessionId,
-        intent: None,
-        slots: Vec::new()
+        intent: parsed_result.intent,
+        slots: parsed_result.slots
     };
     let result_json = serde_json::to_string(&nlu_intent_parsed).unwrap();
     mqtt_client.publish("hermes/nlu/intentParsed", QoS::AtLeastOnce, false, result_json).unwrap();
@@ -83,18 +87,18 @@ pub fn hermes_nlu_query(mqtt_client: &mut MqttClient, engine: &SnipsNluEngine, q
     let parsed_query: hermes::NluQuery = match serde_json::from_str(&query) {
         Ok(pq) => { pq }
         Err(e) => {
-            hermes_error_nlu(mqtt_client, &e.to_string());
+            hermes_error_nlu(mqtt_client, None, &e.to_string());
             return;
         }
     };
 
     if parsed_query.input.is_none() {
-        hermes_error_nlu(mqtt_client, "No input field");
+        hermes_error_nlu(mqtt_client, Some(parsed_query), "No input field");
         return;
     }
 
     if parsed_query.sessionId.is_none() {
-        hermes_error_nlu(mqtt_client, "No sessionId field");
+        hermes_error_nlu(mqtt_client, Some(parsed_query), "No sessionId field");
         return;
     }
 
