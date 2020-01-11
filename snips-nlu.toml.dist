@@ -1,0 +1,5 @@
+[mqtt]
+username = ""
+password = ""
+host = "localhost"
+port = 1883
