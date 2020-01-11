@@ -8,3 +8,4 @@ I'm a beginner in rust development so don't be surprised...
 Build instructions
 =
 Soon
+git push -u origin master

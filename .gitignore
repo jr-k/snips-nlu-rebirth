@@ -1,6 +1,5 @@
 /target
 **/*.rs.bk
-.idea/
 *.log
 snips-nlu.toml
 .idea

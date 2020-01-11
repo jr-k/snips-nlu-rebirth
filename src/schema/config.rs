@@ -2,11 +2,18 @@ use serde_derive::Deserialize;
 
 #[derive(Deserialize)]
 pub struct Config {
-    pub mqtt: Mqtt
+    pub global: ConfigGlobal,
+    pub mqtt: ConfigMqtt
 }
 
 #[derive(Deserialize)]
-pub struct Mqtt {
+pub struct ConfigGlobal {
+    pub engine_dir: String
+}
+
+
+#[derive(Deserialize)]
+pub struct ConfigMqtt {
     pub host: String,
     pub port: u16,
     pub username: String,

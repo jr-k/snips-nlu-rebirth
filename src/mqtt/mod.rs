@@ -65,6 +65,16 @@ pub fn hermes_nlu_intent_not_recognized(mqtt_client: &mut MqttClient, parsed_que
     mqtt_client.publish("hermes/nlu/intentNotRecognized", QoS::AtLeastOnce, false, result_json).unwrap();
 }
 
+pub fn hermes_nlu_intent_parsed(mqtt_client: &mut MqttClient, parsed_query: hermes::NluQuery) {
+    let nlu_intent_parsed: hermes::NluIntentParsed = hermes::NluIntentParsed {
+        input: parsed_query.input,
+        id: parsed_query.id,
+        sessionId: parsed_query.sessionId
+    };
+    let result_json = serde_json::to_string(&nlu_intent_parsed).unwrap();
+    mqtt_client.publish("hermes/nlu/intentParsed", QoS::AtLeastOnce, false, result_json).unwrap();
+}
+
 pub fn hermes_nlu_query(mqtt_client: &mut MqttClient, engine: &SnipsNluEngine, query: &str) {
     let parsed_query: hermes::NluQuery = match serde_json::from_str(&query) {
         Ok(pq) => { pq }
@@ -96,4 +106,7 @@ pub fn hermes_nlu_query(mqtt_client: &mut MqttClient, engine: &SnipsNluEngine, q
         hermes_nlu_intent_not_recognized(mqtt_client, parsed_query);
         return;
     }
+
+    hermes_nlu_intent_parsed(mqtt_client, parsed_query);
+    return;
 }

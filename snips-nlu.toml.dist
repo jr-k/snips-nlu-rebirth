@@ -1,5 +1,12 @@
+[global]
+engine_dir = "/path/to/nlu_engine/"
+
 [mqtt]
 username = ""
 password = ""
 host = "localhost"
 port = 1883
+tls = false
+ssl_cert = "/path/to/mycert.cert.pem"
+ssl_key = "/path/to/mycert.key.pem"
+ssl_cert_chain = "/path/to/ca-chain.cert.pem"

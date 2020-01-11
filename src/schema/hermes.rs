@@ -29,3 +29,11 @@ pub struct NluIntentNotRecognized {
     pub id: Option<String>,
     pub sessionId: Option<String>
 }
+
+#[allow(non_snake_case)]
+#[derive(Serialize)]
+pub struct NluIntentParsed {
+    pub input: Option<String>,
+    pub id: Option<String>,
+    pub sessionId: Option<String>
+}

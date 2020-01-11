@@ -20,14 +20,12 @@ fn main() {
 
     //info!("Snips NLU Alice started...");
 
-    let default_engine = "/root/repos/snips-nlu/engines/lights_1";
-
     let cli = App::new("snips-nlu-rebirth")
         .about("Snips NLU interactive CLI for parsing intents")
         .arg(
             Arg::with_name("NLU_ENGINE_DIR")
                 .required(true)
-                .default_value(default_engine)
+                .default_value("")
                 .takes_value(true)
                     .index(1)
                     .help("path to the trained nlu engine directory"),
@@ -43,11 +41,15 @@ fn main() {
         .get_matches();
 
     let conf_file = cli.value_of("CONF_FILE").unwrap();
-    let engine_dir = cli.value_of("NLU_ENGINE_DIR").unwrap();
-
     let config: config::Config = *parse_configuration(conf_file);
-    let engine: SnipsNluEngine = *load_nlu_engine(engine_dir);
 
+    let mut engine_dir = cli.value_of("NLU_ENGINE_DIR").unwrap();
+
+    if engine_dir.len() == 0 {
+        engine_dir = &config.global.engine_dir;
+    }
+
+    let engine: SnipsNluEngine = *load_nlu_engine(engine_dir);
     mqtt::start(&config, &engine);
 }
 
@@ -55,7 +57,6 @@ fn parse_configuration(conf_file: &str) -> Box<config::Config> {
     println!("\nLoading the conf file...");
     let contents = fs::read_to_string(conf_file).expect("Something went wrong reading the configuration file");
     let config: config::Config = toml::from_str(&contents).unwrap();
-    println!("{}", config.mqtt.tls);
     Box::new(config)
 }
 
