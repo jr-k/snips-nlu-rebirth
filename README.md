@@ -3,6 +3,11 @@ Snips NLU rebirth
 
 The aim of this repository is to bring back to life the `snips-nlu` bin that wasn't fully open source.
 
+Dependencies
+=
+
+- `apt install mosquitto mosquitto-clients clang`
+
 Build instructions
 =
 
