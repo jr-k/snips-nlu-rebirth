@@ -37,3 +37,7 @@ API for NLU :
 - `hermes/nlu/intentNotRecognized` : ✅ 
 - `hermes/error/nlu` : ✅ 
 
+
+Todo
+=
+- TLS for MQTT server
