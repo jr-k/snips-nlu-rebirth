@@ -2,6 +2,7 @@
 extern crate toml;
 extern crate log;
 extern crate snips_nlu_lib;
+extern crate snips_nlu_ontology;
 extern crate serde_json;
 extern crate env_logger;
 

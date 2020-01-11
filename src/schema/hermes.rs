@@ -1,5 +1,6 @@
 use serde_derive::{Serialize, Deserialize};
 use std::fmt;
+use crate::schema::snips_nlu;
 
 #[allow(non_snake_case)]
 #[derive(Deserialize)]
@@ -35,5 +36,7 @@ pub struct NluIntentNotRecognized {
 pub struct NluIntentParsed {
     pub input: Option<String>,
     pub id: Option<String>,
-    pub sessionId: Option<String>
+    pub sessionId: Option<String>,
+    pub intent: Option<snips_nlu::SnipsNluIntent>,
+    pub slots: Vec<snips_nlu::SnipsNluSlot>,
 }
