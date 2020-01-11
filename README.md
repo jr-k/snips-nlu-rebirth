@@ -10,7 +10,7 @@ Dependencies
 - mqtt server/client (Mosquitto)
 - clang
 
-- `apt install mosquitto mosquitto-clients clang`
+Just get these dependencies from apt repositories: `apt install mosquitto mosquitto-clients clang`
 
 Build instructions
 =
