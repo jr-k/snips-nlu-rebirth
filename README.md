@@ -6,6 +6,10 @@ The aim of this repository is to bring back to life the `snips-nlu` bin that was
 Dependencies
 =
 
+- rustup
+- mqtt server/client (Mosquitto)
+- clang
+
 - `apt install mosquitto mosquitto-clients clang`
 
 Build instructions
