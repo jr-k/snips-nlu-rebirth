@@ -27,6 +27,20 @@ Build instructions
 
   `cargo run`
   
+Run
+=
+
+- Run `mosquitto_sub -t '#' -v` to see whats going on 
+
+- Based on lights dataset (https://github.com/snipsco/snips-nlu/blob/master/sample_datasets/lights_dataset.json) you can train a model and ask to NLU to parse a query
+
+`mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'`
+
+the output would be
+`
+hermes/nlu/intentParsed 
+{"input":"light in the garage","id":null,"sessionId":"42","intent":{"intentName":"turnLightOn","confidenceScore":0.3685922},"slots":[{"rawValue":"garage","value":{"kind":"Custom","value":"garage"},"alternatives":[],"range":{"start":13,"end":19},"entity":"room","slotName":"room"}]}
+`
   
 API reference
 =
