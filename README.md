@@ -3,6 +3,16 @@ Snips NLU rebirth
 
 The aim of this repository is to bring back to life the `snips-nlu` bin that wasn't fully open source.
 
+Training
+=
+
+- The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu.
+
+- After you cloned it you'll be able to train a model, let's choose the provided lights dataset.
+`snips-nlu /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
+
+- Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model. (See "Build instructions" section below)
+
 Dependencies
 =
 
@@ -27,16 +37,6 @@ Build instructions
   
   `cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml`
   
-Training
-=
-
-- The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu.
-
-- After you cloned it you'll be able to train a model, let's choose the provided lights dataset.
-`snips-nlu /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
-
-- Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.
-
 Run
 =
 
