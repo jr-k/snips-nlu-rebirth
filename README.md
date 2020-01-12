@@ -46,10 +46,12 @@ Run
 
   `cargo run`
 
+- You can trigger the NLU by sending a MQTT message
 
-`mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'`
+  `mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'`
 
-the output on topic `hermes/nlu/intentParsed` would be
+> the output on topic `hermes/nlu/intentParsed` would be:
+
 ```json
 {
     "input": "light in the garage",
