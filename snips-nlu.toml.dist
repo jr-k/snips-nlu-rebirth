@@ -1,5 +1,5 @@
 [global]
-engine_dir = "/path/to/nlu_engine/"
+engine_dir = "/path/to/output_trained_engine"
 
 [mqtt]
 username = ""
