@@ -27,10 +27,6 @@ Build instructions
   
   `cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml`
   
-- Finally build/run project
-
-  `cargo run`
-
 Training
 =
 
@@ -46,7 +42,10 @@ Run
 
 - Run `mosquitto_sub -t '#' -v` to see whats going on 
 
-- Based on lights dataset (https://github.com/snipsco/snips-nlu/blob/master/sample_datasets/lights_dataset.json) you can train a model (see Training section) and ask to NLU to parse a query
+- Finally build/run project
+
+  `cargo run`
+
 
 `mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'`
 
