@@ -40,6 +40,8 @@ Build instructions
 Run
 =
 
+**! You won't be able to compile this on a raspberry pi, you need more power so you'll need to cross compile using a specific toolchain, there is more information in this page: https://github.com/jr-k/snips-nlu-rebirth/blob/master/XCOMPILE.md !**
+
 - Run `mosquitto_sub -t '#' -v` to see whats going on 
 
 - Finally build/run project
