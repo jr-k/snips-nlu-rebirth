@@ -31,13 +31,15 @@ Dinghy will assume the toolchain looks relatively "regular". That is, it expects
 find something that looks like a `sysroot`, a directory called bin with a compiler
 and binutils.
 
+For a raspberry pi, I suggest you to download this one: https://github.com/raspberrypi/tools/tree/master/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf
+
 Once you have this toolchain, that can compile and link a simple C helloworld
 to something running on your device, you're ready to start playing with rust and dinghy.
 
 ### Install Rust target
 
 ```
-rustup target install arm-unknown-linux-gnueabi
+rustup target install arm-unknown-linux-gnueabihf
 ```
 
 ### Configure dinghy
@@ -50,7 +52,7 @@ link to, or the password prompts will drive you crazy.
 ```
 [platforms.raspbian-stretch]
 rustc_triple="arm-unknown-linux-gnueabihf"
-toolchain="/path/to/a/toolchain/for/arm-unknown-linux-gnueabi"
+toolchain="/path/to/a/toolchain/for/arm-unknown-linux-gnueabihf"
 
 [ssh_devices]
 raspi = { hostname = "raspi.local", username="pi", platform="raspbian-stretch" }
@@ -72,5 +74,15 @@ name are supposed to pass, the one with fail should break.
 % cargo dinghy -d raspi test fail
 [...]
 ```
+
+### Build snips-nlu-rebirth
+```
+# debug version
+% cargo dinghy -d raspi build
+# release version
+% cargo dinghy -d raspi build --release
+```
+
+The output will be availabble in `targert/arm-unknown-linux-gnueabihf/{debug|release}/snips-nlu-rebirth`.
 
 That's it! Enjoy!
