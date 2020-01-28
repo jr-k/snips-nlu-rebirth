@@ -29,11 +29,11 @@ The snips-nlu training part is provided by this repository: https://github.com/s
 
 
 
-3. With snips-nlu tools, you'll be able to train a model. But first we need to prepare the targeted language.
+3. Thanks to snips-nlu tools you'll be able to train a model. But first we need to prepare the targeted language.
 
   `snips-nlu download en`
 
-4. Then train a dataset, let's take the sample available.
+4. Then train a dataset. Let's take the sample available on the snips-nlu repository.
 
   `snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
 
