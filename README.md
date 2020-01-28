@@ -9,19 +9,18 @@ Training
 The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu. 
 
 
-> Download pre-built binaries
-
-- Here is the precious one, a freshly pre-built wheel for arm architecture (like raspberrypi): %soon%
-
-- But first you'll need to install some dependencies: `pip install Cython`
-
-- Then you can download the pre-built binaries and install it: `wget %soon% && pip install %soon% && pip install setuptools_rust`
+> Download pre-built binaries (Python 3.7 armhf architecture)
 
 
-> Build from source
 
-- After you cloned it you'll be able to train a model, let's choose the provided lights dataset.
-`snips-nlu /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
+
+- With snips-nlu tools, you'll be able to train a model. But first we need to prepare the target language.
+
+`snips-nlu download en`
+
+- Then train a dataset, let's take the sample available.
+
+`snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
 
 - Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model. (See "Build instructions" section below)
 
