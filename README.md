@@ -29,7 +29,7 @@ The snips-nlu training part is provided by this repository: https://github.com/s
 
 
 
-3. With snips-nlu tools, you'll be able to train a model. But first we need to prepare the target language.
+3. With snips-nlu tools, you'll be able to train a model. But first we need to prepare the targeted language.
 
   `snips-nlu download en`
 
