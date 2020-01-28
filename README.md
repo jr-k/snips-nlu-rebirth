@@ -6,7 +6,19 @@ The aim of this repository is to bring back to life the `snips-nlu` bin that was
 Training
 =
 
-- The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu.
+The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu. 
+
+
+> Download pre-built binaries
+
+- Here is the precious one, a freshly pre-built wheel for arm architecture (like raspberrypi): %soon%
+
+- But first you'll need to install some dependencies: `pip install Cython`
+
+- Then you can download the pre-built binaries and install it: `wget %soon% && pip install %soon% && pip install setuptools_rust`
+
+
+> Build from source
 
 - After you cloned it you'll be able to train a model, let's choose the provided lights dataset.
 `snips-nlu /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
