@@ -9,20 +9,33 @@ Training
 The snips-nlu training part is provided by this repository: https://github.com/snipsco/snips-nlu. 
 
 
-> Download pre-built binaries (Python 3.7 armhf architecture)
+> You can build from source or download and install pre-built binaries I built. These binaries are for armhf architectures like raspberrypi and are working for python3.7. Don't follow steps 1 and 2 if you want to build snips-nlu yourself.
 
 
+1. Download all wheels available here: [wheels/README.md](Prebuilt wheels README.md)
+
+2. Install them all in that order:
+
+  `pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl`
+
+  `pip3 install scipy-1.3.3-cp37-cp37m-linux_armv7l.whl`
+
+  `pip3 install snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl`
+
+  `pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl`
+
+  `pip3 install snips_nlu-0.20.2-py3-none-any.whl`
 
 
-- With snips-nlu tools, you'll be able to train a model. But first we need to prepare the target language.
+3. With snips-nlu tools, you'll be able to train a model. But first we need to prepare the target language.
 
-`snips-nlu download en`
+  `snips-nlu download en`
 
-- Then train a dataset, let's take the sample available.
+4. Then train a dataset, let's take the sample available.
 
-`snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
+  `snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
 
-- Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model. (See "Build instructions" section below)
+* *Note for later: Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
 
 Dependencies
 =
