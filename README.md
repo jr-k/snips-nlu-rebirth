@@ -12,7 +12,7 @@ The snips-nlu training part is provided by this repository: https://github.com/s
 > You can build from source or download and install pre-built binaries I built. These binaries are for armhf architectures like raspberrypi and are working for python3.7. Don't follow steps 1 and 2 if you want to build snips-nlu yourself.
 
 
-1. Download all wheels available here: [Prebuilt wheels README.md](wheels/README.md)
+1. Download all wheels by running following commands (MD5 and SHA256 checksums: [Prebuilt wheels README.md](wheels/README.md))
 
   `wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl?raw=true`
 
