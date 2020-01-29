@@ -85,17 +85,37 @@ cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml
 ```
 
 * *Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
-  
-Run
-=
-
-- Run `mosquitto_sub -t '#' -v` to see whats going on 
 
 - Finally build/run project
 
 ```bash
-cargo run
+cargo run # or build
 ```
+  
+Download prebuilt package
+=
+
+- If you don't want to cross-compile a binary for raspberry you can find a prebuilt binary here: [snips-nlu-rebirth](dist/snips-nlu-rebirth)
+
+
+```bash
+mkdir -p /home/pi/snips-nlu-rebirth && cd /home/pi/snips-nlu-rebirth
+wget -O snips-nlu-rebirth https://github.com/jr-k/snips-nlu-rebirth/blob/master/dist/snips-nlu-rebirth
+wget -O snips-nlu.toml https://github.com/jr-k/snips-nlu-rebirth/blob/master/snips-nlu.toml.dist
+```
+
+* *Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
+
+- Finally run project
+
+```bash
+./snips-nlu-rebirth
+```
+
+Run
+=
+
+- Run `mosquitto_sub -t '#' -v` to see whats going on 
 
 - You can trigger the NLU by sending a MQTT message
 
