@@ -15,6 +15,8 @@ The snips-nlu training part is provided by this repository: https://github.com/s
 1. Download all wheels by running following commands (MD5 and SHA256 checksums: [Prebuilt wheels README.md](wheels/README.md))
 
 ```bash
+sudo apt install libatlas3-base libgfortran5
+
 cd /home/pi
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scipy-1.3.3-cp37-cp37m-linux_armv7l.whl?raw=true
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl?raw=true
