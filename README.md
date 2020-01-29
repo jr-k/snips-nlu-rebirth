@@ -171,3 +171,6 @@ API for NLU :
 Todo
 =
 - TLS for MQTT server
+
+License
+This library is provided by JRK as Open Source software. See LICENSE for more information.
