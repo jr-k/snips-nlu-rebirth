@@ -102,6 +102,7 @@ Download prebuilt package
 mkdir -p /home/pi/snips-nlu-rebirth && cd /home/pi/snips-nlu-rebirth
 wget -O snips-nlu-rebirth https://github.com/jr-k/snips-nlu-rebirth/blob/master/dist/snips-nlu-rebirth?raw=true
 wget -O snips-nlu.toml https://github.com/jr-k/snips-nlu-rebirth/blob/master/snips-nlu.toml.dist?raw=true
+chmod +x ./snips-nlu-rebirth
 ```
 
 * *Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
