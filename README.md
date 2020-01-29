@@ -34,11 +34,15 @@ pip3 install snips_nlu-0.20.2-py3-none-any.whl
 
 3. Thanks to snips-nlu tools you'll be able to train a model. But first we need to prepare the targeted language.
 
-  `snips-nlu download en`
+```bash 
+snips-nlu download en
+```
 
 4. Then train a dataset. Let's take the sample available on the snips-nlu repository.
 
-  `snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine`.
+```bash
+snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine
+```
 
 * *Note for later: Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
 
@@ -56,15 +60,21 @@ Build instructions
 
 - We need a rust compiler so let's install rustup:
 
-  `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 - Download repository
 
-  `git clone https://github.com/jr-k/snips-nlu-rebirth && cd snips-nlu-rebirth`
+```bash
+git clone https://github.com/jr-k/snips-nlu-rebirth && cd snips-nlu-rebirth
+```
   
 - Setup your configuration and edit
   
-  `cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml`
+```bash
+cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml
+```
   
 Run
 =
@@ -75,11 +85,15 @@ Run
 
 - Finally build/run project
 
-  `cargo run`
+```bash
+cargo run
+```
 
 - You can trigger the NLU by sending a MQTT message
 
-  `mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'`
+```bash
+mosquitto_pub -t 'hermes/nlu/query' -m '{"input":"light in the garage", "sessionId":"42"}'
+```
 
 > the output on topic `hermes/nlu/intentParsed` would be:
 
