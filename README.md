@@ -33,7 +33,7 @@ pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl
 pip3 install snips_nlu-0.20.2-py3-none-any.whl
 ```
 
-3. Thanks to snips-nlu tools you'll be able to train a model. But first we need to prepare the targeted language. (Warning: if you installed wheels from `pi` user, `snips-nlu` path will be `/home/pi/.local/bin/snips-nlu`
+3. Thanks to snips-nlu tools you'll be able to train a model. But first we need to prepare the targeted language. **(Warning: if you installed wheels from `pi` user, `snips-nlu` path will be `/home/pi/.local/bin/snips-nlu`)**
 
 ```bash 
 snips-nlu download en
