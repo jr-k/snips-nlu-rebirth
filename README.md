@@ -66,6 +66,8 @@ Build instructions
 =
 **! You won't be able to compile this on a raspberry pi, you need more power so you'll need to cross compile using a specific toolchain, there is more information in this page: https://github.com/jr-k/snips-nlu-rebirth/blob/master/XCOMPILE.md !**
 
+**Prebuilt binary is now available, see section "Download prebuilt package" below for more informations.**
+
 - We need a rust compiler so let's install rustup:
 
 ```bash
