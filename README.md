@@ -15,8 +15,8 @@ The snips-nlu training part is provided by this repository: https://github.com/s
 1. Download all wheels by running following commands (MD5 and SHA256 checksums: [Prebuilt wheels README.md](wheels/README.md))
 
 ```bash
-wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl?raw=true
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scipy-1.3.3-cp37-cp37m-linux_armv7l.whl?raw=true
+wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl?raw=true
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl?raw=true
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl?raw=true
 wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master/wheels/snips_nlu-0.20.2-py3-none-any.whl?raw=true
@@ -25,8 +25,8 @@ wget --content-disposition https://github.com/jr-k/snips-nlu-rebirth/blob/master
 2. Install them all in this order:
 
 ```bash
-pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl
 pip3 install scipy-1.3.3-cp37-cp37m-linux_armv7l.whl
+pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl
 pip3 install snips_nlu_utils-0.9.1-cp37-cp37m-linux_armv7l.whl
 pip3 install snips_nlu_parsers-0.4.3-cp37-cp37m-linux_armv7l.whl
 pip3 install snips_nlu-0.20.2-py3-none-any.whl
