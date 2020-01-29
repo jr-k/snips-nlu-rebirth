@@ -26,7 +26,7 @@ The snips-nlu training part is provided by this repository: https://github.com/s
   
 
 
-2. Install them all in that order:
+2. Install them all in this order:
 
   `pip3 install scikit_learn-0.22.1-cp37-cp37m-linux_armv7l.whl`
 
