@@ -49,8 +49,6 @@ cd snips-nlu/
 snips-nlu train sample_datasets/lights_dataset.json path_to_output_trained_engine/
 ```
 
-* *Note for later: Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
-
 Dependencies
 =
 
@@ -84,6 +82,8 @@ git clone https://github.com/jr-k/snips-nlu-rebirth && cd snips-nlu-rebirth
 ```bash
 cp snips-nlu.toml.dist snips-nlu.toml && nano snips-nlu.toml
 ```
+
+* *Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
   
 Run
 =
