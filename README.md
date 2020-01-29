@@ -95,7 +95,7 @@ cargo run # or build
 Download prebuilt package
 =
 
-- If you don't want to cross-compile a binary for raspberry you can find a prebuilt binary here: [snips-nlu-rebirth](dist/snips-nlu-rebirth)
+- If you don't want to cross-compile a binary for raspberry you can find a prebuilt binary here: (MD5 and SHA256 checksums: [Prebuilt binary snips-nlu-rebirth README.md](dist/README.md))
 
 
 ```bash
