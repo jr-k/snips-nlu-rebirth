@@ -42,10 +42,12 @@ snips-nlu download en
 4. Then train a dataset. Let's take the sample available on the snips-nlu repository.
 
 ```bash
-snips-nlu train /path/to/snips-nlu/repository/sample_datasets/lights_dataset.json /path/to/output_trained_engine
+git clone https://github.com/snipsco/snips-nlu
+cd snips-nlu/
+snips-nlu train sample_datasets/lights_dataset.json path_to_output_trained_engine/
 ```
 
-* *Note for later: Don't forget to add `path/to/output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
+* *Note for later: Don't forget to add `path_to_output_trained_engine` to the configuration file `snips-nlu.toml` (from this project) in the `engine_dir` variable of the `[global]` section and you're ready to parse any query trained from the `lights_dataset` model.* *
 
 Dependencies
 =
