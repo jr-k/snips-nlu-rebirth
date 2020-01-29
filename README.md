@@ -61,7 +61,7 @@ Dependencies
 Get these dependencies from apt repositories by running
 
 ```bash
-apt install mosquitto mosquitto-clients clang
+sudo apt install mosquitto mosquitto-clients clang
 ```
 
 Build instructions
