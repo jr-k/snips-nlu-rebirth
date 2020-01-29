@@ -174,4 +174,4 @@ Todo
 
 License
 =
-This library is provided by JRK as Open Source software. See LICENSE for more information.
+This library is provided by [JRK](https://github.com/jr-k) as Open Source software. See [LICENSE](LICENSE) for more information.
