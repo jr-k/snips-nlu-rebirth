@@ -17,7 +17,7 @@ pub fn start(config: &config::Config, engine: &SnipsNluEngine) {
         Ok(c) => {
             let (mut mqtt_client, notifications) = c;
 
-            mqtt_client.subscribe("hermes/#", QoS::AtLeastOnce).unwrap();
+            mqtt_client.subscribe("hermes/nlu/#", QoS::AtLeastOnce).unwrap();
 
             for notification in notifications {
                 match notification {
