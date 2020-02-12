@@ -53,7 +53,10 @@ fn main() {
     }
 
     let engine: SnipsNluEngine = *load_nlu_engine(engine_dir);
-    mqtt::start(&config, &engine);
+
+    let mut engine_holder = mqtt::EngineContext { engine: engine, engine_dir: engine_dir.into() };
+
+    engine_holder.start(&config);
 }
 
 fn parse_configuration(conf_file: &str) -> Box<config::Config> {
