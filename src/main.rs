@@ -19,7 +19,9 @@ fn main() {
         .format_timestamp_nanos()
         .init();
 
-    //info!("Snips NLU Alice started...");
+
+    println!("snips-nlu-rebirth v{}", env!("CARGO_PKG_VERSION"));
+    println!("========================");
 
     let cli = App::new("snips-nlu-rebirth")
         .about("Snips NLU interactive CLI for parsing intents")
