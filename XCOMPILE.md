@@ -83,6 +83,6 @@ name are supposed to pass, the one with fail should break.
 % cargo dinghy -d raspi build --release
 ```
 
-The output will be availabble in `targert/arm-unknown-linux-gnueabihf/{debug|release}/snips-nlu-rebirth`.
+The output will be availabble in `target/arm-unknown-linux-gnueabihf/{debug|release}/snips-nlu-rebirth`.
 
 That's it! Enjoy!
