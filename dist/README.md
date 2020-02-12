@@ -3,5 +3,5 @@ Prebuilt binary
 
 | Name                                                | MD5                              | SHA256                                                           |
 |-----------------------------------------------------|----------------------------------|------------------------------------------------------------------|
-| [snips-nlu-rebirth](snips-nlu-rebirth)             | 187d124ec1e11ec77bb2cee6c943bdd0 | 46f83bd18ad1a52dd7a1adc92c0d53dae76d9b0a3558fcc5470271a04d7192c9 |
+| [snips-nlu-rebirth](snips-nlu-rebirth)             | ca9f615483693906c1020debeced0838 | 7c6b3d94eacd73116adb190930000e493f7814384bac8a61ce13b487e4e6d179 |
 
