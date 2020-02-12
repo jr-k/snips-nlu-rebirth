@@ -28,7 +28,13 @@ pub fn start(config: &config::Config, engine: &SnipsNluEngine) {
                         if &packet.topic_name == "hermes/nlu/query" {
                             hermes_nlu_query(&mut mqtt_client, &engine, &query);
                         } else if &packet.topic_name == "hermes/nlu/exit" {
-                            let ret_code: i32 = str::FromStr::from_str(query).unwrap();
+                            let ret_code: i32 = match str::FromStr::from_str(query) {
+                                Ok(rc) => { rc },
+                                Err(_) => {
+                                    println!("\nBad exit return code, using 0x01");
+                                    1
+                                }
+                            };
 
                             process::exit(ret_code);
                         }
