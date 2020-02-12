@@ -4,6 +4,7 @@ use rumqtt::{MqttClient, MqttOptions, QoS, SecurityOptions};
 use snips_nlu_lib::SnipsNluEngine;
 use snips_nlu_ontology::{IntentParserResult};
 use std::str;
+use std::process;
 use crate::schema::config;
 use crate::schema::hermes;
 
@@ -26,6 +27,10 @@ pub fn start(config: &config::Config, engine: &SnipsNluEngine) {
 
                         if &packet.topic_name == "hermes/nlu/query" {
                             hermes_nlu_query(&mut mqtt_client, &engine, &query);
+                        } else if &packet.topic_name == "hermes/nlu/exit" {
+                            let ret_code: i32 = str::FromStr::from_str(query).unwrap();
+
+                            process::exit(ret_code);
                         }
                     },
                     _ => {}
