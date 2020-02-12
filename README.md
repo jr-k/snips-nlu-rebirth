@@ -166,7 +166,12 @@ API for NLU :
 - `hermes/nlu/intentParsed` : ✅ 
 - `hermes/nlu/slotParsed` : ❌
 - `hermes/nlu/intentNotRecognized` : ✅ 
-- `hermes/error/nlu` : ✅ 
+- `hermes/error/nlu` : ✅ (for backward compatibility with `snips-nlu`)
+
+Extras:
+- `hermes/nlu/exit` : ✅ (exit the program gracefully)
+- `hermes/nlu/reload/engine` : ✅ (hotreload the trained engine)
+
 
 Todo
 =
