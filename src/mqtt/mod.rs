@@ -1,6 +1,6 @@
 extern crate serde_json;
 
-use rumqtt::{MqttClient, MqttOptions, QoS, SecurityOptions};
+use rumqtt::{MqttClient, MqttOptions, QoS, SecurityOptions, ReconnectOptions};
 use snips_nlu_lib::SnipsNluEngine;
 use snips_nlu_ontology::{IntentParserResult};
 use std::str;
@@ -23,11 +23,14 @@ impl EngineContext {
 
         let mqtt_options = MqttOptions::new("snips-nlu-rebirth", config.mqtt.host.clone(), config.mqtt.port.clone())
             .set_keep_alive(30)
+            .set_clean_session(false)
+            .set_reconnect_opts(ReconnectOptions::Always(5))
             .set_security_opts(SecurityOptions::UsernamePassword(config.mqtt.username.clone(), config.mqtt.password.clone()));
 
         let _conn = match MqttClient::start(mqtt_options) {
             Ok(c) => {
                 let (mut mqtt_client, notifications) = c;
+                println!("Connect");
 
                 mqtt_client.subscribe("hermes/nlu/#", QoS::AtLeastOnce).unwrap();
                 mqtt_client.publish("hermes/nlu/ready", QoS::AtLeastOnce, false, env!("CARGO_PKG_VERSION")).unwrap();
@@ -36,6 +39,8 @@ impl EngineContext {
                     match notification {
                         rumqtt::client::Notification::Publish(packet) => {
                             let query = str::from_utf8(&packet.payload).unwrap();
+
+                            println!("Message on topic {:?}", packet.topic_name);
 
                             if &packet.topic_name == "hermes/nlu/query" {
                                 self.hermes_nlu_query(&mut mqtt_client, &query);
@@ -60,9 +65,15 @@ impl EngineContext {
             }
             Err(e) => {
                 match e {
-                    rumqtt::error::ConnectError::MqttConnectionRefused(_mqtt_error) => {},
-                    rumqtt::error::ConnectError::Io(_io_error) => {},
-                    _ => {}
+                    rumqtt::error::ConnectError::MqttConnectionRefused(_mqtt_error) => {
+
+                    },
+                    rumqtt::error::ConnectError::Io(_io_error) => {
+
+                    },
+                    _ => {
+
+                    }
                 }
             }
         };
@@ -86,6 +97,8 @@ impl EngineContext {
         let nlu_intent_not_recognized: hermes::NluIntentNotRecognized = hermes::NluIntentNotRecognized {
             input: parsed_query.input,
             id: parsed_query.id,
+            siteId: parsed_query.siteId,
+            customData: parsed_query.customData,
             sessionId: parsed_query.sessionId
         };
         let result_json = serde_json::to_string(&nlu_intent_not_recognized).unwrap();
@@ -96,6 +109,8 @@ impl EngineContext {
         let nlu_intent_parsed: hermes::NluIntentParsed = hermes::NluIntentParsed {
             input: parsed_query.input,
             id: parsed_query.id,
+            siteId: parsed_query.siteId,
+            customData: parsed_query.customData,
             sessionId: parsed_query.sessionId,
             intent: parsed_result.intent,
             slots: parsed_result.slots
