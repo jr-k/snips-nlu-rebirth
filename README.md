@@ -176,6 +176,7 @@ Extras:
 Todo
 =
 - TLS for MQTT server
+- Loop reconnect when lost connection from mqtt server
 
 License
 =
