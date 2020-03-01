@@ -10,18 +10,22 @@ pub struct NluQuery {
     pub siteId: Option<String>,
     pub customData: Option<String>,
     pub intentFilter: Option<Vec<String>>,
+    pub intentWhitelist: Option<Vec<String>>,
+    pub intentBlacklist: Option<Vec<String>>,
     pub sessionId: Option<String>
 }
 
 impl fmt::Display for NluQuery {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "NluQuery(input:{:?}, sessionId:{:?}, id:{:?}, siteId:{:?}, customData:{:?}, intentFilter:{:?})",
+        write!(f, "NluQuery(input:{:?}, sessionId:{:?}, id:{:?}, siteId:{:?}, customData:{:?}, intentFilter:{:?}, intentWhitelist:{:?}, intentBlacklist:{:?})",
                self.input,
                self.sessionId,
                self.id,
                self.siteId,
                self.customData,
-               self.intentFilter
+               self.intentFilter,
+               self.intentWhitelist,
+               self.intentBlacklist
         )
     }
 }
@@ -41,6 +45,7 @@ pub struct NluIntentNotRecognized {
     pub id: Option<String>,
     pub siteId: Option<String>,
     pub customData: Option<String>,
+    pub error: Option<String>,
     pub sessionId: Option<String>
 }
 

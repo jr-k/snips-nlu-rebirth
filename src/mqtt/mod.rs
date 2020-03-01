@@ -93,12 +93,13 @@ impl EngineContext {
         mqtt_client.publish("hermes/error/nlu", QoS::AtLeastOnce, false, result_json).unwrap();
     }
 
-    pub fn hermes_nlu_intent_not_recognized(&self, mqtt_client: &mut MqttClient, parsed_query: hermes::NluQuery) {
+    pub fn hermes_nlu_intent_not_recognized(&self, mqtt_client: &mut MqttClient, parsed_query: hermes::NluQuery, error_message: String) {
         let nlu_intent_not_recognized: hermes::NluIntentNotRecognized = hermes::NluIntentNotRecognized {
             input: parsed_query.input,
             id: parsed_query.id,
             siteId: parsed_query.siteId,
             customData: parsed_query.customData,
+            error: Some(error_message),
             sessionId: parsed_query.sessionId
         };
         let result_json = serde_json::to_string(&nlu_intent_not_recognized).unwrap();
@@ -128,6 +129,9 @@ impl EngineContext {
             }
         };
 
+        let mut intent_whitelist : Vec<&str> = Vec::new();
+        let mut intent_blacklist : Vec<&str> = Vec::new();
+
         if parsed_query.input.is_none() {
             self.hermes_error_nlu(mqtt_client, Some(parsed_query), "No input field");
             return;
@@ -138,19 +142,49 @@ impl EngineContext {
             return;
         }
 
+        if !parsed_query.intentFilter.is_none() {
+            intent_whitelist = parsed_query.intentFilter.as_ref().unwrap().iter().map(AsRef::as_ref).collect();
+        } else if !parsed_query.intentWhitelist.is_none() {
+            intent_whitelist = parsed_query.intentWhitelist.as_ref().unwrap().iter().map(AsRef::as_ref).collect();
+        }
+
+        if !parsed_query.intentBlacklist.is_none() {
+            intent_blacklist = parsed_query.intentBlacklist.as_ref().unwrap().iter().map(AsRef::as_ref).collect();
+        }
+
         let intents_alternatives = 0;
         let slots_alternatives = 0;
         let input = parsed_query.input.as_ref().unwrap();
-        let parsed_result = self.engine.parse_with_alternatives(&*input, None, None, intents_alternatives, slots_alternatives).unwrap();
 
-        if parsed_result.intent.intent_name.is_none() {
-            //IntentParserResult { input: "l", intent: IntentClassifierResult { intent_name: None, confidence_score: 0.54227686 }, slots: [], alternatives: [] }
-            self.hermes_nlu_intent_not_recognized(mqtt_client, parsed_query);
-            return;
+        let parsed_result = self.engine.parse_with_alternatives(
+            &*input,
+            match intent_whitelist.is_empty() {
+                true => { None },
+                false => { Some(intent_whitelist) }
+            },
+            match intent_blacklist.is_empty() {
+                true => { None },
+                false => { Some(intent_blacklist) }
+            },
+            intents_alternatives,
+            slots_alternatives
+        );
+
+        return match parsed_result {
+            Ok(parsed_result_unwraped) => {
+                 if parsed_result_unwraped.intent.intent_name.is_none() {
+                    //IntentParserResult { input: "l", intent: IntentClassifierResult { intent_name: None, confidence_score: 0.54227686 }, slots: [], alternatives: [] }
+                    self.hermes_nlu_intent_not_recognized(mqtt_client, parsed_query, String::new());
+                    return;
+                }
+
+                //IntentParserResult { input: "light in the garage", intent: IntentClassifierResult { intent_name: Some("turnLightOn"), confidence_score: 0.3685922 }, slots: [Slot { raw_value: "garage", value: Custom(StringValue { value: "garage" }), alternatives: [], range: 13..19, entity: "room", slot_name: "room", confidence_score: None }], alternatives: [] }
+                self.hermes_nlu_intent_parsed(mqtt_client, parsed_query, parsed_result_unwraped);
+                return;
+            },
+            Err(e) => {
+                self.hermes_nlu_intent_not_recognized(mqtt_client, parsed_query, e.to_string());
+            }
         }
-
-        //IntentParserResult { input: "light in the garage", intent: IntentClassifierResult { intent_name: Some("turnLightOn"), confidence_score: 0.3685922 }, slots: [Slot { raw_value: "garage", value: Custom(StringValue { value: "garage" }), alternatives: [], range: 13..19, entity: "room", slot_name: "room", confidence_score: None }], alternatives: [] }
-        self.hermes_nlu_intent_parsed(mqtt_client, parsed_query, parsed_result);
-        return;
     }
 }

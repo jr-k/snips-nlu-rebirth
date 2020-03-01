@@ -161,7 +161,7 @@ This project follows the hermes protocol described here: https://docs.snips.ai/r
 
 API for NLU :
 
-- `hermes/nlu/query` : ✅ 
+- `hermes/nlu/query` : ✅ (added `intentWhitelist` which is an alias for `intentFilter`; added `intentBlacklist`)
 - `hermes/nlu/partialQuery` : ❌
 - `hermes/nlu/intentParsed` : ✅ 
 - `hermes/nlu/slotParsed` : ❌
@@ -176,7 +176,6 @@ Extras:
 Todo
 =
 - TLS for MQTT server
-- Loop reconnect when lost connection from mqtt server
 
 License
 =
