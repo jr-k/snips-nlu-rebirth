@@ -14,6 +14,8 @@ in your garage.
 Assuming [rustup](http://rustup.rs) is already installed...
 
 ```
+sudo apt-get install pkg-config libssl-dev
+
 cargo install cargo-dinghy
 
 # If it's already installed, add '--force'
